@@ -1,0 +1,79 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>AWS Cost Optimization Plugin</title>
+</head>
+<body>
+  <h1>AWS Cost Optimization Plugin</h1>
+  
+  <h2>Enter your AWS credentials and region</h2>
+  <form id="optimizationForm">
+    <label for="accessKey">AWS Access Key:</label>
+    <input type="text" id="accessKey" name="accessKey" required><br><br>
+
+    <label for="secretKey">AWS Secret Key:</label>
+    <input type="text" id="secretKey" name="secretKey" required><br><br>
+
+    <label for="region">AWS Region:</label>
+    <input type="text" id="region" name="region" required><br><br>
+
+    <label for="userEmail">Your Email:</label>
+    <input type="email" id="userEmail" name="userEmail" required><br><br>
+
+    <button type="submit">Enable Optimization</button>
+  </form>
+
+  <h2>Cost Data</h2>
+  <button onclick="fetchCosts()">Fetch Cost Data</button>
+  <div id="costs"></div>
+
+  <script>
+    // Fetch cost data based on user AWS credentials
+    async function fetchCosts() {
+      const accessKey = document.getElementById('accessKey').value;
+      const secretKey = document.getElementById('secretKey').value;
+      const region = document.getElementById('region').value;
+
+      try {
+        const response = await fetch('http://localhost:5000/fetch-costs', {
+          method: 'POST',
+          headers: { 'Content-Type': 'application/json' },
+          body: JSON.stringify({ accessKey, secretKey, region }),
+        });
+        const data = await response.json();
+        let costsDiv = document.getElementById('costs');
+        costsDiv.innerHTML = '';
+        data.forEach(cost => {
+          costsDiv.innerHTML += `<p>Date: ${cost.date}, Cost: $${cost.cost}</p>`;
+        });
+      } catch (error) {
+        console.error('Error fetching cost data:', error);
+      }
+    }
+
+    // Submit user details to enable optimization
+    document.getElementById('optimizationForm').addEventListener('submit', async (event) => {
+      event.preventDefault();
+
+      const accessKey = document.getElementById('accessKey').value;
+      const secretKey = document.getElementById('secretKey').value;
+      const region = document.getElementById('region').value;
+      const userEmail = document.getElementById('userEmail').value;
+
+      try {
+        const response = await fetch('http://localhost:5000/enable-optimization', {
+          method: 'POST',
+          headers: { 'Content-Type': 'application/json' },
+          body: JSON.stringify({ accessKey, secretKey, region, userEmail }),
+        });
+        const result = await response.json();
+        alert(result.message);
+      } catch (error) {
+        console.error('Error enabling optimization:', error);
+      }
+    });
+  </script>
+</body>
+</html>
