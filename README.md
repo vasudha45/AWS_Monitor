@@ -125,7 +125,3 @@ The backend is configured to send **email notifications** once an optimization a
 ## 🤝 Contributing
 
 Feel free to fork this project and submit **Pull Requests**. If you have any issues or feature requests, please create an **Issue** in the GitHub repository.
-
----
-
-### Thank You for using the AWS Cost Optimization Plugin! 🌟
