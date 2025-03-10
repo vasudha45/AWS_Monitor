@@ -7,7 +7,6 @@ This project automates the process of **monitoring and optimizing AWS EC2 costs*
 - **Cost Optimization**: Use machine learning or simple algorithms to determine idle EC2 instances and stop them to save costs.
 - **Dynamic AWS Integration**: Accept AWS credentials from the user to interact with AWS resources.
 - **Terraform Integration**: Use Terraform to apply infrastructure changes and automate resource management.
-- **Real-time Email Alerts**: Send email notifications when optimizations are triggered.
 
 ---
 
@@ -45,9 +44,6 @@ This project automates the process of **monitoring and optimizing AWS EC2 costs*
 4. **Triggering Optimization** ⚡:
    - Using **AWS Lambda**, **SNS**, and **CloudWatch**, the system automatically stops idle EC2 instances.
    - The backend triggers **Terraform** to apply the changes.
-
-5. **Email Notification** 📧:
-   - After stopping the instances, the system sends an email to the user with the status of the optimization.
 
 ---
 
@@ -107,15 +103,12 @@ terraform apply -auto-approve
 This will create the necessary AWS resources defined in the Terraform files.
 
 ---
+![WhatsApp Image 2025-03-11 at 00 42 32_641f4a8d](https://github.com/user-attachments/assets/629132f1-056f-4c0b-b49c-73b6dabb5f63)
 
-## 📧 Email Notifications
 
-The backend is configured to send **email notifications** once an optimization action (like stopping EC2 instances) has been triggered. Ensure that your email service provider allows SMTP access for the email to be sent.
-
----
 
 ## 📈 Future Improvements
-
+- **Real-time Email Alerts**: Send email notifications when optimizations are triggered.
 - **Advanced Machine Learning**: Implement machine learning models to better analyze cost data and make smarter optimization decisions.
 - **User Authentication**: Implement a login system to securely manage AWS credentials and provide optimized, user-specific suggestions.
 - **Graphical Dashboards**: Add data visualizations for better understanding of AWS usage and optimization savings.
